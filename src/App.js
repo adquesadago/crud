@@ -13,6 +13,7 @@ function App() {
   useEffect(() => {
     (async () => {
         const result = await getCollection("tasks")
+        console.log(result)
     })()
   }, [])
 
