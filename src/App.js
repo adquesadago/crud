@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { isEmpty, size } from 'lodash'
 import shortid from 'shortid'
+import { getCollection } from './actions'
 
 function App() {
   const [task, setTask] = useState("")
@@ -8,6 +9,12 @@ function App() {
   const [editMode, setEditMode] = useState(false)
   const [id, setId] = useState("")
   const [error, setError] = useState(null)
+
+  useEffect(() => {
+    (async () => {
+        const result = await getCollection("tasks")
+    })()
+  }, [])
 
   const validForm = () => {
     let isValid = true
@@ -100,7 +107,7 @@ function App() {
         </div>
         <div className="col-4">
           <h4 className="text-center"> 
-            { editMode ? "Modificar Tarea" : "Agreagar Tarea" }
+            { editMode ? "Modificar Tarea" : "Agregar Tarea" }
           </h4>
           <form onSubmit={ editMode ? saveTask : addTask}>
             {
